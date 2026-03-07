@@ -16,8 +16,19 @@ struct TaskGroupDetailView: View {
     @Binding var group: TaskGroup
     //@State - same view
     //@Binding - parent view
+    @Environment(\.horizontalSizeClass) var sizeClass
+    
+    
     var body: some View {
         List {
+            Section {
+                if sizeClass == .regular {
+                    GroupStatsView(tasks: group.tasks)
+                        .listRowInsets(EdgeInsets())
+                        .listRowBackground(Color(.secondarySystemBackground))
+                }
+            }
+            
             ForEach($group.tasks) {$task in
                 HStack {
                     Image(systemName: task.isCompleted ? "checkmark.fill" : "circle")

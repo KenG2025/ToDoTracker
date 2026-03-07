@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var selectedGroup: TaskGroup?
     //Core difference between iPhone and iPad
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
+    @State private var isShowingAddGroup = false
     
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
@@ -24,7 +25,15 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle("")
+            .navigationTitle("ToDo App")
+            .listStyle(.sidebar)
+            .toolbar {
+                Button {
+                    isShowingAddGroup = true
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
             
         } detail: {
             if let selectedGroup = selectedGroup {
@@ -34,6 +43,11 @@ struct ContentView: View {
                     ContentUnavailableView("Select a Group", systemImage: "sidebar.left")
                 }
             }
+        }
+        .sheet(isPresented: $isShowingAddGroup){
+            NewGroupView {newGroup in
+                taskGroups.append(newGroup)
+            selectedGroup = newGroup}
         }
         
     }
