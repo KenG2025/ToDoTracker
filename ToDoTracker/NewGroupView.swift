@@ -12,7 +12,7 @@ struct NewGroupView: View {
     
     @State private var groupName = ""
     @State private var selectedIcon = "list.bullet"
-    let icons = ["list.bullet", "bookmark.fill", "star", "house.fill", "heart.fill"]
+    let icons = ["list.bullet", "bookmark.fill", "star", "house.fill", "heart.fill", "duffle.bag.fill"]
     
     @Environment(\.dismiss) var dismiss
     var onSave: (TaskGroup) -> Void
@@ -52,12 +52,12 @@ struct NewGroupView: View {
                 ToolbarItem(placement: .confirmationAction){
                     Button("Save"){
                         let newGroup = TaskGroup(title: groupName, symbolName: selectedIcon, tasks: [] )
-                    onSave(newGroup)
-                    dismiss()
-                    
+                        onSave(newGroup)
+                        dismiss()
+                        
+                    }
                 }
             }
         }
     }
-}
 }

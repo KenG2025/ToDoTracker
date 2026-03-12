@@ -33,7 +33,7 @@ struct GroupStatsView: View {
                 Text("\(Int(progress * 100))%")
             }
             frame(width: 60, height: 60)
-            .padding()
+                .padding()
             
             VStack(alignment: .leading){
                 Text("Task Progress")
